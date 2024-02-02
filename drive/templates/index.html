@@ -1,0 +1,33 @@
+<!-- navbar.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Navbar</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav>
+        {% for navbar in categories %}
+            <div class="navbar">
+                <span>{{ navbar.title }}</span>
+                {% for dropdown in navbar.dropdown_set.all %}
+                    <div class="dropdown">
+{#                        <a href="{{ dropdown.get_url }}">{{ dropdown.title   }} </a>#}
+                    <h4>{{dropdown.title   }}</h4>
+                        <div class="dropdown-content">
+                            {% for nav_item in dropdown.navitem_set.all %}
+                                <a href="{{ nav_item.get_url }}">{{ nav_item.title }}</a> <br/>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </nav>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>
