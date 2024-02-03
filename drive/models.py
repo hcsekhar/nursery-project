@@ -15,6 +15,8 @@ class Navbar(models.Model):
 
     def __str__(self):
         return self.name
+    def get_url(self):
+        return reverse('category_lists', args=[self.slug])
 
 
 class Category(models.Model):
@@ -54,12 +56,11 @@ class Items(models.Model):
     navbar = models.ForeignKey(Navbar, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True)
-    img = models.URLField(max_length=200,null=True, blank=True)
     name = models.CharField(max_length=255, null=True)
     slug = AutoSlugField(populate_from='name', editable=True, always_update=True)
     dis_price = models.DecimalField(max_digits=10, decimal_places=3)
     org_price = models.DecimalField(max_digits=10, decimal_places=3,default=0)
-    item_img = models.URLField(max_length=7000,null=True)
+    img = models.URLField(max_length=7000,null=True)
     conditions = models.CharField(max_length=10000)
     offer =   models.CharField(max_length=5000)
     discount = models.DecimalField(max_digits=10, decimal_places=3,default=0)
