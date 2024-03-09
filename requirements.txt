@@ -1,0 +1,6 @@
+supervisor
+gunicorn
+django
+pillow
+django-autoslug
+django-crispy-forms
